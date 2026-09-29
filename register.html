@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register – GlobeTrek Adventures</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <!DOCTYPE html>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.php" class="logo">
+    <span class="logo-text">Globe<span>Trek</span></span>
+  </a>
+</nav>
+
+<div class="auth-layout">
+
+  <!-- LEFT VISUAL -->
+  <div class="auth-visual register-visual">
+    <h2>Start Your <em>Journey</em> Today</h2>
+    <p>Create your GlobeTrek account and unlock personalized travel experiences, exclusive deals, and seamless booking management.</p>
+
+    <ul class="visual-benefits">
+      <li><div class="benefit-dot">✓</div> Discover curated travel packages</li>
+      <li><div class="benefit-dot">✓</div> Save and manage dream destinations</li>
+      <li><div class="benefit-dot">✓</div> Get exclusive early-bird offers</li>
+      <li><div class="benefit-dot">✓</div> Secure and fast bookings</li>
+    </ul>
+  </div>
+
+  <!-- RIGHT FORM -->
+  <div class="auth-form-panel">
+    <div class="auth-form-wrap">
+
+      <div class="form-header">
+        <h1>Create Account</h1>
+        <p>Already have an account? <a href="login.html">Login here →</a></p>
+      </div>
+
+      <!-- SUCCESS -->
+      <div id="successMsg" class="success-msg">
+        ✅ Account created successfully! Redirecting...
+      </div>
+
+      
+
+      <form action="register.php" method="POST" onsubmit="return handleRegister(event)">
+
+<!-- FULL NAME -->
+<div class="form-group">
+  <label>Full Name</label>
+  <div class="field-wrap">
+    <input type="text" id="name" name="name" placeholder="John Doe" oninput="validateName()">
+    <small class="error-msg" id="name-error"></small>
+  </div>
+</div>
+
+<!-- EMAIL -->
+<div class="form-group">
+  <label>Email Address</label>
+  <div class="field-wrap">
+    <input type="email" id="email" name="email" placeholder="you@example.com" oninput="validateEmail()">
+    <small class="error-msg" id="email-error"></small>
+  </div>
+</div>
+
+<!-- PASSWORD -->
+<div class="form-group">
+  <label>Password</label>
+  <div class="field-wrap">
+    <input type="password" id="password" name="password" placeholder="Minimum 6 characters" oninput="validatePassword()">
+    <small class="error-msg" id="pass-error"></small>
+  </div>
+</div>
+
+<!-- CONFIRM PASSWORD -->
+<div class="form-group">
+  <label>Confirm Password</label>
+  <div class="field-wrap">
+    <input type="password" id="confirmPassword" placeholder="Re-enter password" oninput="validateConfirmPassword()">
+    <small class="error-msg" id="confirm-error"></small>
+  </div>
+</div>
+
+<!-- BUTTON -->
+<button type="submit" class="btn-submit" id="registerBtn">
+  Create Account
+</button>
+
+</form>
+
+    
+      <div class="terms-note">
+        By signing up you agree to our Terms of Service and Privacy Policy.
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+
+function validateName() {
+  const el = document.getElementById('name');
+  const err = document.getElementById('name-error');
+
+  if (el.value.trim() === "") {
+    el.classList.add('error');
+    err.textContent = "Name is required";
+    return false;
+  }
+
+  el.classList.remove('error');
+  el.classList.add('success');
+  err.textContent = "";
+  return true;
+}
+
+function validateEmail() {
+  const el = document.getElementById('email');
+  const err = document.getElementById('email-error');
+  const val = el.value.trim();
+
+  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+  if (val === "") {
+    el.classList.add('error');
+    err.textContent = "Email is required";
+    return false;
+  }
+
+  if (!valid) {
+    el.classList.add('error');
+    err.textContent = "Enter a valid email";
+    return false;
+  }
+
+  el.classList.remove('error');
+  el.classList.add('success');
+  err.textContent = "";
+  return true;
+}
+
+function validatePassword() {
+  const el = document.getElementById('password');
+  const err = document.getElementById('pass-error');
+
+  if (el.value.length < 6) {
+    el.classList.add('error');
+    err.textContent = "Minimum 6 characters required";
+    return false;
+  }
+
+  el.classList.remove('error');
+  el.classList.add('success');
+  err.textContent = "";
+  return true;
+}
+
+function validateConfirmPassword() {
+  const pass = document.getElementById('password').value;
+  const el = document.getElementById('confirmPassword');
+  const err = document.getElementById('confirm-error');
+
+  if (el.value !== pass || el.value === "") {
+    el.classList.add('error');
+    err.textContent = "Passwords do not match";
+    return false;
+  }
+
+  el.classList.remove('error');
+  el.classList.add('success');
+  err.textContent = "";
+  return true;
+}
+
+function handleRegister(e) {
+  const nameOk = validateName();
+  const emailOk = validateEmail();
+  const passOk = validatePassword();
+  const confirmOk = validateConfirmPassword();
+
+  if (!nameOk || !emailOk || !passOk || !confirmOk) {
+    e.preventDefault(); // stop only if invalid
+    return false;
+  }
+
+  // allow PHP form submission
+  return true;
+}
+
+</script>
+
+</body>
+</html>

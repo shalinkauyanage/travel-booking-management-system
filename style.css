@@ -1,0 +1,269 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+:root {
+  --navy: #1a2a40;
+  --blue: #2f5d8a;
+  --light-blue: #4a90e2;
+
+  --white: #ffffff;
+  --cream: #f5f5f5;
+
+  --text-dark: #222;
+  --text-mid: #555;
+  --text-light: #888;
+
+  --error: #d32f2f;
+  --success: #388e3c;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--cream);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAV */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: var(--navy);
+}
+
+.logo {
+  text-decoration: none;
+}
+
+.logo-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--white);
+}
+
+.logo-text span {
+  color: var(--light-blue);
+}
+
+/* MAIN LAYOUT */
+.auth-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.auth-visual {
+  background:
+    linear-gradient(rgba(20,40,70,0.7), rgba(20,40,70,0.7)),
+    url('img/ugabay.jpg') center/cover no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+}
+
+.register-visual {
+  background:
+    linear-gradient(rgba(20,40,70,0.7), rgba(20,40,70,0.7)),
+    url('img/ella.jpg') center/cover no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* TEXT */
+.auth-visual h2,
+.register-visual h2 {
+  font-size: 2.4rem;
+  color: var(--white);
+  margin-bottom: 15px;
+}
+
+.auth-visual h2 em,
+.register-visual h2 em {
+  color: var(--light-blue);
+}
+
+.auth-visual p,
+.register-visual p {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+}
+
+/* BENEFITS */
+.visual-benefits {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.visual-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #eee;
+  font-size: 0.85rem;
+}
+
+.benefit-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--light-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: white;
+}
+
+/* RIGHT PANEL */
+.auth-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: var(--white);
+}
+
+.auth-form-wrap {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px; 
+}
+
+/* HEADER */
+.form-header {
+  margin-bottom: 25px;
+}
+
+.form-header h1 {
+  font-size: 2rem;
+  color: var(--navy);
+}
+
+.form-header p {
+  color: var(--text-mid);
+  font-size: 0.9rem;
+}
+
+.form-header p a {
+  color: #e67e22;
+  text-decoration: none;
+}
+
+/* FORM */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  color: var(--text-mid);
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* INPUT */
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* FOCUS */
+.form-group input:focus {
+  border-color: var(--light-blue);
+}
+
+/* ERROR */
+.error-msg {
+  color: var(--error);
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+input.error {
+  border-color: var(--error);
+}
+
+/* SUCCESS MESSAGE */
+.success-msg {
+  display: none;
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 6px;
+  padding: 10px;
+  color: #2e7d32;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.success-msg.show {
+  display: block;
+}
+
+/* BUTTON */
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+/* LINKS */
+.forgot-link {
+  color: var(--light-blue);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* TERMS */
+.terms-note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-visual,
+  .register-visual {
+    display: none;
+  }
+
+  nav {
+    padding: 14px 20px;
+  }
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – GlobeTrek Adventures</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.php" class="logo">
+    <span class="logo-text">Globe<span>Trek</span></span>
+  </a>
+</nav>
+
+<div class="auth-layout">
+  <!-- LEFT VISUAL -->
+  <div class="auth-visual">
+    <h2>Your Next <em>Adventure</em> Awaits</h2>
+    <p>Login to access your personalized travel dashboard, manage bookings, and explore exclusive member deals.</p>
+    <ul class="visual-benefits">
+      <li><div class="benefit-dot">✓</div> Manage all your bookings in one place</li>
+      <li><div class="benefit-dot">✓</div> Access exclusive member-only deals</li>
+      <li><div class="benefit-dot">✓</div> Save favourite destinations & packages</li>
+      <li><div class="benefit-dot">✓</div> 24/7 dedicated travel support</li>
+    </ul>
+  </div>
+
+  <!-- RIGHT FORM -->
+  <div class="auth-form-panel">
+    <div class="auth-form-wrap">
+      <div class="form-header">
+        <h1>Welcome Back</h1>
+        <p>New to GlobeTrek? <a href="register.html">Create a free account →</a></p>
+      </div>
+
+      
+      <div id="loginError" style="
+        display:none;
+        background:#ffe5e5;
+        color:#c0392b;
+        padding:10px;
+        border-radius:6px;
+        margin-bottom:15px;
+        font-size:0.9rem;
+      "></div>
+
+      <!-- FORM -->
+      <div id="successMsg" class="success-msg">
+        ✅ Login successful! Redirecting to your dashboard...
+      </div>
+
+      <form action="login.php" method="POST" onsubmit="return handleLogin(event)">
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="field-wrap">
+            <input type="email" id="email" name="email" placeholder="you@example.com" oninput="validateEmail()" />
+            <small class="error-msg" id="email-error"></small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="field-wrap">
+            <input type="password" id="password" name="password" placeholder="Enter your password" oninput="validatePassword()" />
+            <small class="error-msg" id="pass-error"></small>
+          </div>
+        </div>
+
+        <div class="form-row-between">
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn-submit" id="loginBtn">
+          Login to GlobeTrek
+        </button>
+
+      </form>
+
+      <div class="terms-note">
+        By logging in you agree to our Terms of Servicemand Privacy Policy.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function validateEmail() {
+    const el = document.getElementById('email');
+    const err = document.getElementById('email-error');
+    const val = el.value.trim();
+
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+    if (!err) return false;
+
+    if (val === "") {
+      el.classList.add('error');
+      el.classList.remove('success');
+      err.textContent = "Email is required";
+      return false;
+    }
+
+    if (!valid) {
+      el.classList.add('error');
+      el.classList.remove('success');
+      err.textContent = "Enter a valid email address";
+      return false;
+    }
+
+    el.classList.remove('error');
+    el.classList.add('success');
+    err.textContent = "";
+    return true;
+  }
+
+  function validatePassword() {
+    const el = document.getElementById('password');
+    const err = document.getElementById('pass-error');
+    const val = el.value.trim();
+
+    if (!err) return false;
+
+    if (val === "") {
+      el.classList.add('error');
+      el.classList.remove('success');
+      err.textContent = "Password is required";
+      return false;
+    }
+
+    if (val.length < 6) {
+      el.classList.add('error');
+      el.classList.remove('success');
+      err.textContent = "Minimum 6 characters required";
+      return false;
+    }
+
+    el.classList.remove('error');
+    el.classList.add('success');
+    err.textContent = "";
+    return true;
+  }
+
+  function togglePass() {
+    const field = document.getElementById('password');
+    if (!field) return;
+    field.type = field.type === 'password' ? 'text' : 'password';
+  }
+
+  function handleLogin(e) {
+    const emailOk = validateEmail();
+    const passOk = validatePassword();
+
+    if (!emailOk || !passOk) {
+      e.preventDefault();
+      return false;
+    }
+    return true;
+  }
+
+  function socialLogin(provider) {
+    alert(provider + " login integration would be configured here with OAuth 2.0.");
+  }
+
+  
+  const params = new URLSearchParams(window.location.search);
+  const errorBox = document.getElementById("loginError");
+
+  if(params.get("error") === "invalid"){
+    errorBox.style.display = "block";
+    errorBox.innerText = "❌ Invalid email or password";
+  }
+
+  if(params.get("error") === "empty"){
+    errorBox.style.display = "block";
+    errorBox.innerText = "⚠️ Please fill all fields";
+  }
+</script>
+
+</body>
+</html>
