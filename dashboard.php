@@ -526,7 +526,7 @@ td strong { color: var(--navy); }
             <p>GlobeTrek Adventures · Explore the World</p>
         </div>
         <div class="topbar-actions">
-            <span class="tag-customer">Traveler Access</span>
+            <span class="tag-customer">🌍 Traveler Access</span>
         </div>
     </div>
 
@@ -669,7 +669,7 @@ td strong { color: var(--navy); }
         <div class="modal" id="customizeModal" style="display:flex;">
             <div class="modal-content">
                 <a href="?section=mybookings" class="modal-close">&times;</a>
-                <h2>Customize Your Tour</h2>
+                <h2>✏️ Customize Your Tour</h2>
                 <p style="margin-bottom: 20px; font-size:0.85rem;">Customize details for <strong><?= htmlspecialchars($customize_data['package_name']) ?></strong></p>
                 
                 <form method="POST">
@@ -700,7 +700,7 @@ td strong { color: var(--navy); }
 
     <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;">
         <a href="?section=mybookings" class="btn btn-outline">Cancel</a>
-        <button type="submit" class="btn btn-blue">Save Customizations</button>
+        <button type="submit" class="btn btn-blue">💾 Save Customizations</button>
     </div>
 </form>
             </div>
@@ -736,7 +736,7 @@ td strong { color: var(--navy); }
                 </div>
 
                 <div style="margin-top: 24px;">
-                    <button type="submit" class="btn btn-blue">Update Profile</button>
+                    <button type="submit" class="btn btn-blue">💾 Update Profile</button>
                     <a href="?section=mybookings" class="btn btn-outline" style="margin-left: 8px;">View My Trips</a>
                 </div>
             </form>

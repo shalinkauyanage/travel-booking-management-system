@@ -1,8 +1,5 @@
 <?php
-// ============================================================
-//  GlobeTrek Adventures — Staff Dashboard
-//  Access: Staff only (role = 'staff')
-// ============================================================
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -65,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($booking_id > 0 && in_array($new_status, $allowed_statuses)) {
             $stmt = $pdo->prepare("UPDATE bookings SET status = ? WHERE id = ?");
             $stmt->execute([$new_status, $booking_id]);
-            $_SESSION['flash'] = "Booking #$booking_id updated to '$new_status'.";
+            $_SESSION['flash'] = "✅ Booking #$booking_id updated to '$new_status'.";
         }
         header("Location: staff_dashboard.php?section=bookings");
         exit;
@@ -90,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 WHERE id=?
             ");
             $stmt->execute([$name, $destination, $price, $duration, $description, $availability, $image, $pkg_id]);
-            $_SESSION['flash'] = "Package '$name' updated successfully.";
+            $_SESSION['flash'] = "✅ Package '$name' updated successfully.";
         }
         header("Location: staff_dashboard.php?section=packages");
         exit;
@@ -110,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 WHERE id=? AND role='customer'
             ");
             $stmt->execute([$full_name, $customer_id]);
-            $_SESSION['flash'] = "Customer record updated.";
+            $_SESSION['flash'] = "✅ Customer record updated.";
         }
         header("Location: staff_dashboard.php?section=customers");
         exit;
@@ -132,9 +129,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ");
             $stmt->execute([$name, $destination, $price, $duration, $description, $availability, $image]);
-            $_SESSION['flash'] = "New package '$name' added successfully.";
+            $_SESSION['flash'] = "✅ New package '$name' added successfully.";
         } else {
-            $_SESSION['flash'] = "Failed to add package. Please check required fields.";
+            $_SESSION['flash'] = "❌ Failed to add package. Please check required fields.";
         }
         header("Location: staff_dashboard.php?section=packages");
         exit;
@@ -146,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($pkg_id > 0) {
             $stmt = $pdo->prepare("DELETE FROM packages WHERE id = ?");
             $stmt->execute([$pkg_id]);
-            $_SESSION['flash'] = "Package deleted successfully.";
+            $_SESSION['flash'] = "✅ Package deleted successfully.";
         }
         header("Location: staff_dashboard.php?section=packages");
         exit;
@@ -516,7 +513,7 @@ td strong { color: var(--navy); }
             <p>GlobeTrek Adventures · Staff Control Panel</p>
         </div>
         <div class="topbar-actions">
-            <span class="tag-staff">Staff Access</span>
+            <span class="tag-staff">🟢 Staff Access</span>
         </div>
     </div>
 

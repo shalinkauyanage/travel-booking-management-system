@@ -61,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             // Delete user (bookings will cascade if foreign key set)
             $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
             $stmt->execute([$user_id]);
-            $_SESSION['flash'] = "User deleted successfully.";
+            $_SESSION['flash'] = "✅ User deleted successfully.";
         } else {
-            $_SESSION['flash'] = "Cannot delete your own admin account.";
+            $_SESSION['flash'] = "❌ Cannot delete your own admin account.";
         }
         
         header("Location: admin_dashboard.php?section=users");
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 WHERE id=?
             ");
             $stmt->execute([$name, $destination, $price, $duration, $description, $availability, $image, $pkg_id]);
-            $_SESSION['flash'] = "Package '$name' updated successfully.";
+            $_SESSION['flash'] = "✅ Package '$name' updated successfully.";
         } else {
             // Insert new package
             $stmt = $pdo->prepare("
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ");
             $stmt->execute([$name, $destination, $price, $duration, $description, $availability, $image]);
-            $_SESSION['flash'] = "New package '$name' added successfully.";
+            $_SESSION['flash'] = "✅ New package '$name' added successfully.";
         }
 
         header("Location: admin_dashboard.php?section=packages");
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($pkg_id > 0) {
             $stmt = $pdo->prepare("DELETE FROM packages WHERE id = ?");
             $stmt->execute([$pkg_id]);
-            $_SESSION['flash'] = "Package deleted successfully.";
+            $_SESSION['flash'] = "✅ Package deleted successfully.";
         }
         header("Location: admin_dashboard.php?section=packages");
         exit;
@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($booking_id > 0 && in_array($new_status, $allowed_statuses)) {
             $stmt = $pdo->prepare("UPDATE bookings SET status = ? WHERE id = ?");
             $stmt->execute([$new_status, $booking_id]);
-            $_SESSION['flash'] = "Booking #$booking_id updated to '$new_status'.";
+            $_SESSION['flash'] = "✅ Booking #$booking_id updated to '$new_status'.";
         }
 
         header("Location: admin_dashboard.php?section=bookings");
@@ -351,7 +351,7 @@ td strong { color: var(--navy); }
             <p>GlobeTrek Adventures · Full System Control</p>
         </div>
         <div class="topbar-actions">
-            <span class="tag-admin">Admin Access</span>
+            <span class="tag-admin">👑 Admin Access</span>
         </div>
     </div>
 

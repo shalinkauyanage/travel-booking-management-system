@@ -1,6 +1,5 @@
 <?php
-// packages.php - GlobeTrek Adventures Tour Packages Page
-// No database connection required for this page
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

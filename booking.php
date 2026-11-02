@@ -20,14 +20,14 @@ try {
 
 // ── AUTH GUARD (CUSTOMER ONLY) ───────────────────────────────
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
-    $_SESSION['flash'] = "Please login to book a package.";
+    $_SESSION['flash'] = "❌ Please login to book a package.";
     header("Location: login.html");
     exit();
 }
 
 // allow ONLY customer
 if ($_SESSION['role'] != 'customer') {
-    $_SESSION['flash'] = "Access denied. Customer only.";
+    $_SESSION['flash'] = "❌ Access denied. Customer only.";
     header("Location: login.html");
     exit();
 }
@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
             $package = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$package) {
-                $_SESSION['flash'] = "Package not found.";
+                $_SESSION['flash'] = "❌ Package not found.";
                 header("Location: dashboard.php?section=packages");
                 exit();
             }
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
 
             // Check availability
             if ($availability < $travelers) {
-                $_SESSION['flash'] = "Sorry, only $availability spot(s) available for this package.";
+                $_SESSION['flash'] = "❌ Sorry, only $availability spot(s) available for this package.";
                 header("Location: dashboard.php?section=packages");
                 exit();
             }
@@ -145,13 +145,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
             $update->execute([$travelers, $package_id]);
 
             // Success message
-            $_SESSION['flash'] = "Package '$package_name' booked successfully for $travelers traveler(s) on $travel_date! Status: Pending.";
+            $_SESSION['flash'] = "✅ Package '$package_name' booked successfully for $travelers traveler(s) on $travel_date! Status: Pending.";
 
             header("Location: dashboard.php?section=mybookings");
             exit();
 
         } catch (PDOException $e) {
-            $_SESSION['flash'] = "Database error: " . $e->getMessage();
+            $_SESSION['flash'] = "❌ Database error: " . $e->getMessage();
             header("Location: dashboard.php?section=packages");
             exit();
         }
